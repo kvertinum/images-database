@@ -6,6 +6,9 @@ import org.jetbrains.exposed.sql.ResultRow
 object AlbumTable: LongIdTable("album") {
     val name = varchar("name", 25)
     val password = varchar("password", 50)
+    init {
+        index(true, name)
+    }
 }
 
 data class Album(
