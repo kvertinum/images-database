@@ -34,3 +34,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Folder with images ###
+src/main/resources/images/
