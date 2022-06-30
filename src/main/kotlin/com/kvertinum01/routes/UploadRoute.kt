@@ -1,5 +1,6 @@
 package com.kvertinum01.routes
 
+import com.kvertinum01.REDIRECT_URL
 import com.kvertinum01.database.models.AlbumDAO
 import com.kvertinum01.database.services.AlbumService
 import com.kvertinum01.database.services.AlbumServiceResult
@@ -11,8 +12,6 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-
-const val REDIRECT_URL = "http://localhost"
 
 fun Route.uploadImage() {
     val albumDAO = AlbumDAO()
