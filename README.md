@@ -9,14 +9,14 @@
 ```Создание альбома```
 > POST /create application/x-www-form-urlencoded
 
-* album-name: String - Album name
-* album-key: String - Album key
-* album-key-repeat: String - Repeat album key
+* __album-name__: String - *Album name*
+* __album-key__: String - *Album key*
+* __album-key-repeat__: String - *Repeat album key*
 
 ### /upload
 ```Загрузка изображения в альбом```
 > POST /upload multipart/form-data
 
-* file: image/jpeg, image/png - File you want to add to the album
-* album-name: String - Album name
-* album-key: String - Album key
+* __file__: image/jpeg, image/png - *File you want to add to the album*
+* __album-name__: String - *Album name*
+* __album-key__: String - *Album key*
