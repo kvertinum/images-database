@@ -1,6 +1,6 @@
 package com.kvertinum01.routes
 
-import com.kvertinum01.REDIRECT_URL
+import com.kvertinum01.data.model.Response
 import com.kvertinum01.database.models.AlbumDAO
 import com.kvertinum01.database.services.AlbumService
 import com.kvertinum01.database.services.AlbumServiceResult
@@ -46,7 +46,10 @@ fun Route.uploadImage() {
             fileAlbum == null || fileName == null || albumKey == null
             || !fileExists("/images/$fileAlbum")
         ) {
-            call.respond(HttpStatusCode.BadRequest)
+            call.respond(HttpStatusCode.BadRequest, Response(
+                status = "error",
+                content = "Bad request or image not exists",
+            ))
             return@post
         }
 
@@ -54,18 +57,27 @@ fun Route.uploadImage() {
             is AlbumServiceResult.Failed.AlbumDoesNotExist ->
                 call.respond(
                     HttpStatusCode.NotFound,
-                    "Album ${albumServiceResult.name} does not exist"
+                    Response(
+                        status = "error",
+                        content = "Album ${albumServiceResult.name} does not exist",
+                    )
                 )
             is AlbumServiceResult.Success.AlbumInfo -> {
                 if (albumServiceResult.album.password != albumKey) {
                     call.respond(
                         HttpStatusCode.BadRequest,
-                        "Bad album key"
+                        Response(
+                            status = "error",
+                            content = "Bad album key",
+                        )
                     )
                     return@post
                 }
                 writeBytes(fileAlbum!!, fileName!!, fileBytes!!)
-                call.respondRedirect(REDIRECT_URL)
+                call.respond(HttpStatusCode.OK, Response(
+                    status = "success",
+                    content = "Image uploaded successfully",
+                ))
             }
 
             else -> error("Unexpected result $albumServiceResult")

@@ -10,6 +10,12 @@ fun fileExists(path: String): Boolean =
 fun getResourcesDir(path: String): File =
     File("$RESOURCES_DIR$path")
 
+fun writeBytes(album: String, name: String, fileBytes: ByteArray) =
+    File("$RESOURCES_DIR/images/$album/$name").writeBytes(fileBytes)
+
+fun makeDir(name: String) =
+    File("$RESOURCES_DIR/images/$name").mkdir()
+
 fun getListFiles(path: String): List<String> {
     val dir = getResourcesDir(path)
     return if(dir.isDirectory) {
@@ -17,13 +23,4 @@ fun getListFiles(path: String): List<String> {
     } else {
         error("path must be a directory")
     }
-}
-
-fun writeBytes(album: String, name: String, fileBytes: ByteArray) {
-    val filePath = "$RESOURCES_DIR/images/$album/$name"
-    File(filePath).writeBytes(fileBytes)
-}
-
-fun makeDir(name: String) {
-    File("$RESOURCES_DIR/images/$name").mkdir()
 }
