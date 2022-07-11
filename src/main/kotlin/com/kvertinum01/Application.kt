@@ -6,8 +6,6 @@ import com.kvertinum01.plugins.configureRouting
 import com.kvertinum01.plugins.configureSerialization
 import io.ktor.server.application.*
 
-const val REDIRECT_URL = "http://localhost"
-
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module(testing: Boolean = false) {
